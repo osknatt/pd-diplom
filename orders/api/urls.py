@@ -4,6 +4,8 @@ from django_rest_passwordreset.views import reset_password_request_token, reset_
 from api.views import PartnerUpdate, RegisterAccount, LoginAccount, CategoryView, ShopView, ProductInfoView, \
     BasketView, AccountDetails, ContactView, OrderView, PartnerState, PartnerOrders, ConfirmAccount
 
+shops_list = ShopView.as_view({'get': 'list'})
+
 app_name = 'api'
 urlpatterns = [
     path('partner/update', PartnerUpdate.as_view(), name='partner-update'),
@@ -17,8 +19,8 @@ urlpatterns = [
     path('user/password_reset', reset_password_request_token, name='password-reset'),
     path('user/password_reset/confirm', reset_password_confirm, name='password-reset-confirm'),
     path('categories', CategoryView.as_view(), name='categories'),
-    path('shops', ShopView.as_view(), name='shops'),
-    path('products', ProductInfoView.as_view(), name='shops'),
+    path('shops', shops_list, name='shops'),
+    path('products', ProductInfoView.as_view(), name='products'),
     path('basket', BasketView.as_view(), name='basket'),
     path('order', OrderView.as_view(), name='order'),
 ]
